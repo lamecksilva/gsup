@@ -8,3 +8,5 @@ export * from './Pagamento';
 export * from './PedidoDetalhes';
 export * from './Produto';
 export * from './Rastreio';
+export * from './Perfil';
+export * from './Pesquisar';

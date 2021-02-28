@@ -10,40 +10,64 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 import {
   CadastroPage,
   CarrinhoPage,
+  CustomDrawerContent,
   EnderecoPage,
   HomePage,
   LoginPage,
   MeusPedidosPage,
   PagamentoPage,
   PedidoDetalhesPage,
+  PerfilPage,
+  PesquisarPage,
   ProdutoPage,
   RastreioPage,
 } from './src';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
+
+const AppStack = () => {
+  return (
+    <Stack.Navigator headerMode="screen">
+      <Stack.Screen name="Home" component={TabStack} />
+      <Stack.Screen name="Cadastro" component={CadastroPage} />
+      <Stack.Screen name="Carrinho" component={CarrinhoPage} />
+      <Stack.Screen name="Endereco" component={EnderecoPage} />
+      <Stack.Screen name="Login" component={LoginPage} />
+      <Stack.Screen name="Pagamento" component={PagamentoPage} />
+      <Stack.Screen name="PedidoDetalhes" component={PedidoDetalhesPage} />
+      <Stack.Screen name="Produto" component={ProdutoPage} />
+      <Stack.Screen name="Rastreio" component={RastreioPage} />
+      <Stack.Screen name="MeusPedidos" component={MeusPedidosPage} />
+    </Stack.Navigator>
+  );
+};
+
+const TabStack = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen name="Pesquisar" component={PesquisarPage} />
+      <Tab.Screen name="Perfil" component={PerfilPage} />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Cadastro" component={CadastroPage} />
-        <Stack.Screen name="Carrinho" component={CarrinhoPage} />
-        <Stack.Screen name="Endereco" component={EnderecoPage} />
-        <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="MeusPedidos" component={MeusPedidosPage} />
-        <Stack.Screen name="Pagamento" component={PagamentoPage} />
-        <Stack.Screen name="PedidoDetalhes" component={PedidoDetalhesPage} />
-        <Stack.Screen name="Produto" component={ProdutoPage} />
-        <Stack.Screen name="Rastreio" component={RastreioPage} />
-      </Stack.Navigator>
+      <Drawer.Navigator
+        drawerContent={(props) => <CustomDrawerContent {...props} />}>
+        <Drawer.Screen name="Home" component={AppStack} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
