@@ -25,7 +25,6 @@ import {
   PedidoDetalhesPage,
   PerfilPage,
   PesquisarPage,
-  // PesquisarPage,
   ProdutoPage,
   RastreioPage,
 } from './src';
@@ -111,8 +110,13 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <NavigationContainer>
         <Drawer.Navigator
+          drawerType="slide"
           drawerContent={(props) => <CustomDrawerContent {...props} />}>
-          <Drawer.Screen name="Home" component={AppStack} />
+          <Drawer.Screen
+            name="Home"
+            component={AppStack}
+            options={{ swipeEnabled: false }}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     </>
