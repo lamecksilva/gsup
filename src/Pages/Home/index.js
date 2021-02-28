@@ -20,10 +20,11 @@ import {
 } from 'react-native-responsive-screen';
 
 import { categorias } from './categorias';
+import { produtos } from './produtos';
 
 export function HomePage() {
   return (
-    <View style={styles.screenContainer}>
+    <ScrollView style={styles.screenContainer}>
       <View style={styles.bannerContainer}>
         <Card.Cover
           source={{
@@ -38,7 +39,9 @@ export function HomePage() {
 
         <ScrollView horizontal>
           {categorias.map((categoria) => (
-            <TouchableOpacity style={styles.categoryItemContainer}>
+            <TouchableOpacity
+              style={styles.categoryItemContainer}
+              key={Math.random()}>
               <View>
                 <Avatar.Image
                   source={{
@@ -58,93 +61,34 @@ export function HomePage() {
         <Title>Populares</Title>
 
         <ScrollView horizontal>
-          <TouchableOpacity style={styles.produtoItemContainer}>
-            <View>
-              <Image
-                resizeMode="contain"
-                source={{
-                  uri:
-                    'https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.jpg',
-                }}
-                style={styles.produtoImage}
-              />
-            </View>
-            <Headline style={styles.produtoValorText}>R$ 76,50</Headline>
-            <Caption>Hipertrofia</Caption>
-            <Caption>Melhora na Recuperação muscular</Caption>
-            <Caption>Melhor Custo - Benefício</Caption>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.produtoItemContainer}>
-            <View>
-              <Image
-                resizeMode="contain"
-                source={{
-                  uri:
-                    'https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.jpg',
-                }}
-                style={styles.produtoImage}
-              />
-            </View>
-            <Headline style={styles.produtoValorText}>R$ 76,50</Headline>
-            <Caption>Hipertrofia</Caption>
-            <Caption>Melhora na Recuperação muscular</Caption>
-            <Caption>Melhor Custo - Benefício</Caption>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.produtoItemContainer}>
-            <View>
-              <Image
-                resizeMode="contain"
-                source={{
-                  uri:
-                    'https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.jpg',
-                }}
-                style={styles.produtoImage}
-              />
-            </View>
-            <Headline style={styles.produtoValorText}>R$ 76,50</Headline>
-            <Caption>Hipertrofia</Caption>
-            <Caption>Melhora na Recuperação muscular</Caption>
-            <Caption>Melhor Custo - Benefício</Caption>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.produtoItemContainer}>
-            <View>
-              <Image
-                resizeMode="contain"
-                source={{
-                  uri:
-                    'https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.jpg',
-                }}
-                style={styles.produtoImage}
-              />
-            </View>
-            <Headline style={styles.produtoValorText}>R$ 76,50</Headline>
-            <Caption>Hipertrofia</Caption>
-            <Caption>Melhora na Recuperação muscular</Caption>
-            <Caption>Melhor Custo - Benefício</Caption>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.produtoItemContainer}>
-            <View>
-              <Image
-                resizeMode="contain"
-                source={{
-                  uri:
-                    'https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.jpg',
-                }}
-                style={styles.produtoImage}
-              />
-            </View>
-            <Headline style={styles.produtoValorText}>R$ 76,50</Headline>
-            <Caption>Hipertrofia</Caption>
-            <Caption>Melhora na Recuperação muscular</Caption>
-            <Caption>Melhor Custo - Benefício</Caption>
-          </TouchableOpacity>
+          {produtos.map((produto) => (
+            <TouchableOpacity
+              style={styles.produtoItemContainer}
+              key={Math.random()}>
+              <View>
+                <Image
+                  resizeMode="contain"
+                  source={{
+                    uri:
+                      'https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.jpg',
+                  }}
+                  style={styles.produtoImage}
+                />
+              </View>
+              <Subheading>{produto.titulo}</Subheading>
+              <Headline style={styles.produtoValorText}>
+                R$ {produto.valor}
+              </Headline>
+              {produto.descricao.map((desc) => (
+                <>
+                  <Caption>{desc}</Caption>
+                </>
+              ))}
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -173,6 +117,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#e3e3e3',
     padding: wp('1%'),
     borderRadius: 2,
+    flexWrap: 'wrap',
+    minWidth: wp('20%'),
   },
   produtoImage: {
     minHeight: hp('20%'),
