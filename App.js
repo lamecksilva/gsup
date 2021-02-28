@@ -10,7 +10,6 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -26,18 +25,71 @@ import {
   PedidoDetalhesPage,
   PerfilPage,
   PesquisarPage,
+  // PesquisarPage,
   ProdutoPage,
   RastreioPage,
 } from './src';
+import { Appbar } from 'react-native-paper';
+import { StatusBar, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator headerMode="screen">
-      <Stack.Screen name="Home" component={TabStack} />
+    <Stack.Navigator
+      headerMode="screen"
+      screenOptions={{
+        header: ({ scene, previous, navigation }) => {
+          const { options } = scene.descriptor;
+          const title =
+            options.headerTitle !== undefined
+              ? options.headerTitle
+              : options.title !== undefined
+              ? options.title
+              : scene.route.name;
+
+          return (
+            <Appbar.Header style={{ backgroundColor: '#009edf' }}>
+              {previous ? (
+                <Appbar.BackAction onPress={navigation.goBack} />
+              ) : (
+                <TouchableOpacity
+                  style={{ marginLeft: 10 }}
+                  onPress={() => {
+                    navigation.openDrawer();
+                  }}>
+                  <Icon size={30} name="navicon" color="#ffffff" />
+                </TouchableOpacity>
+              )}
+              <Appbar.Content
+                title={title === 'Home' ? 'Growth Suplementos' : title}
+                titleStyle={{
+                  fontSize: 18,
+                  // fontWeight: 'bold',
+                }}
+              />
+              {!previous && (
+                <>
+                  <Appbar.Action
+                    icon="magnify"
+                    color="#ffffff"
+                    onPress={() => navigation.navigate('Pesquisar')}
+                  />
+
+                  <Appbar.Action
+                    icon="cart"
+                    color="#ffffff"
+                    onPress={() => navigation.navigate('Carrinho')}
+                  />
+                </>
+              )}
+            </Appbar.Header>
+          );
+        },
+      }}>
+      <Stack.Screen name="Home" component={HomePage} />
       <Stack.Screen name="Cadastro" component={CadastroPage} />
       <Stack.Screen name="Carrinho" component={CarrinhoPage} />
       <Stack.Screen name="Endereco" component={EnderecoPage} />
@@ -46,29 +98,24 @@ const AppStack = () => {
       <Stack.Screen name="PedidoDetalhes" component={PedidoDetalhesPage} />
       <Stack.Screen name="Produto" component={ProdutoPage} />
       <Stack.Screen name="Rastreio" component={RastreioPage} />
-      <Stack.Screen name="MeusPedidos" component={MeusPedidosPage} />
+      <Stack.Screen name="Perfil" component={PerfilPage} />
+      <Stack.Screen name="Pesquisar" component={PesquisarPage} />
+      <Stack.Screen name="Meus Pedidos" component={MeusPedidosPage} />
     </Stack.Navigator>
-  );
-};
-
-const TabStack = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomePage} />
-      <Tab.Screen name="Pesquisar" component={PesquisarPage} />
-      <Tab.Screen name="Perfil" component={PerfilPage} />
-    </Tab.Navigator>
   );
 };
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={(props) => <CustomDrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={AppStack} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <>
+      <StatusBar barStyle="light-content" />
+      <NavigationContainer>
+        <Drawer.Navigator
+          drawerContent={(props) => <CustomDrawerContent {...props} />}>
+          <Drawer.Screen name="Home" component={AppStack} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
@@ -85,79 +132,16 @@ const App = () => {
  * Home -> Categorias -> Listagem
  *
  */
-/* <StatusBar barStyle="dark-content" />
+/*
         <SafeAreaView>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}>
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Step One</Text>
-                <Text style={styles.sectionDescription}>
-                  Edit <Text style={styles.highlight}>App.js</Text> Growth
-                  Suplementos
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>See Your Changes</Text>
-                <Text style={styles.sectionDescription}>
-                  <ReloadInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Debug</Text>
-                <Text style={styles.sectionDescription}>
-                  <DebugInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Learn More</Text>
-                <Text style={styles.sectionDescription}>
-                  Read the docs to discover what to do next:
-                </Text>
-              </View>
-              <LearnMoreLinks />
-            </View>
-          </ScrollView>
-        </SafeAreaView> */
 
 // const styles = StyleSheet.create({
 //   scrollView: {
 //     backgroundColor: Colors.lighter,
 //   },
-//   engine: {
-//     position: 'absolute',
-//     right: 0,
-//   },
-//   body: {
-//     backgroundColor: Colors.white,
-//   },
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//     color: Colors.black,
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//     color: Colors.dark,
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-//   footer: {
-//     color: Colors.dark,
-//     fontSize: 12,
-//     fontWeight: '600',
-//     padding: 4,
-//     paddingRight: 12,
-//     textAlign: 'right',
-//   },
-// });
+*/
 
 export default App;

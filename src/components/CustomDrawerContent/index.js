@@ -39,15 +39,24 @@ export function CustomDrawerContent(props) {
               <Icon name="rocket" color={color} size={size} />
             )}
             label="Meus Pedidos"
-            onPress={() => props.navigation.navigate('MeusPedidos')}
+            onPress={() => props.navigation.navigate('Meus Pedidos')}
           />
+
           <DrawerItem
+            icon={({ color, size }) => (
+              <Icon name="user" color={color} size={size} />
+            )}
+            label="Meu Perfil"
+            onPress={() => props.navigation.navigate('Perfil')}
+          />
+
+          {/* <DrawerItem
             icon={({ color, size }) => (
               <Icon name="wrench" color={color} size={size} />
             )}
             label="Configurações"
             onPress={() => {}}
-          />
+          /> */}
           {/* <DrawerItem
             icon={({ color, size }) => (
               <Icon name="cloud" color={color} size={size} />
