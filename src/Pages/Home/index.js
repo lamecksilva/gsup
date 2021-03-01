@@ -57,6 +57,62 @@ export function HomePage() {
         </ScrollView>
       </View>
 
+      <View style={styles.lancamentosContainer}>
+        <ScrollView horizontal>
+          <TouchableOpacity style={styles.lancamentosItemContainer}>
+            <View>
+              <Image
+                resizeMode="contain"
+                source={{
+                  uri:
+                    'https://www.gsuplementos.com.br/upload/banner/4a59a48109f814c3f9d86fe6299c6736.jpg',
+                }}
+                style={styles.lancamentoImage}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.lancamentosItemContainer}>
+            <View>
+              <Image
+                resizeMode="contain"
+                source={{
+                  uri:
+                    'https://www.gsuplementos.com.br/upload/banner/843c58b29d5a73052fbb3ad640f2da78.jpg',
+                }}
+                style={styles.lancamentoImage}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.lancamentosItemContainer}>
+            <View>
+              <Image
+                resizeMode="contain"
+                source={{
+                  uri:
+                    'https://www.gsuplementos.com.br/upload/banner/c7202daba6ff04c62cc810e863205530.gif',
+                }}
+                style={styles.lancamentoImage}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.lancamentosItemContainer}>
+            <View>
+              <Image
+                resizeMode="contain"
+                source={{
+                  uri:
+                    'https://www.gsuplementos.com.br/upload/banner/7152a7db105e43361dac2db538d63079.jpg',
+                }}
+                style={styles.lancamentoImage}
+              />
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+
       <View style={styles.popularesContainer}>
         <Title>Populares</Title>
 
@@ -77,15 +133,60 @@ export function HomePage() {
               </View>
               <Subheading>{produto.titulo}</Subheading>
               <Headline style={styles.produtoValorText}>
-                R$ {produto.valor}
+                {produto.valor}
               </Headline>
               {produto.descricao.map((desc) => (
                 <>
-                  <Caption>{desc}</Caption>
+                  <Caption key={Math.random()}>{desc}</Caption>
                 </>
               ))}
             </TouchableOpacity>
           ))}
+        </ScrollView>
+      </View>
+
+      <View style={styles.objetivosContainer}>
+        <Title>Suplementos ideais para seu Esporte</Title>
+
+        <ScrollView horizontal>
+          <TouchableOpacity style={styles.objetivoItemContainer}>
+            <View>
+              <Image
+                resizeMode="contain"
+                source={{
+                  uri:
+                    'https://www.gsuplementos.com.br/upload/banner/6bbe44477dfac699a7f2117be4e88418.jpg',
+                }}
+                style={styles.objetivoImage}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.objetivoItemContainer}>
+            <View>
+              <Image
+                resizeMode="contain"
+                source={{
+                  uri:
+                    'https://www.gsuplementos.com.br/upload/banner/a67e9b481f383a34aaed8cb606b55178.jpg',
+                }}
+                style={styles.objetivoImage}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.objetivoItemContainer}>
+            <View>
+              <Image
+                resizeMode="contain"
+                source={{
+                  uri:
+                    'https://www.gsuplementos.com.br/upload/banner/c7a469548d218a61243dbf47029bb5f7.jpg',
+                }}
+                style={styles.objetivoImage}
+              />
+            </View>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     </ScrollView>
@@ -118,7 +219,7 @@ const styles = StyleSheet.create({
     padding: wp('1%'),
     borderRadius: 2,
     flexWrap: 'wrap',
-    minWidth: wp('20%'),
+    minWidth: wp('18%'),
   },
   produtoImage: {
     minHeight: hp('20%'),
@@ -128,6 +229,31 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
+  lancamentosContainer: { margin: wp('1%'), marginTop: hp('2%') },
+  lancamentosItemContainer: {
+    margin: wp('3%'),
+    backgroundColor: '#e3e3e3',
+    padding: wp('1%'),
+    borderRadius: 2,
+    // minWidth: wp('50%'),
+  },
+  lancamentoImage: {
+    minHeight: hp('25%'),
+    minWidth: hp('25%'),
+  },
+
+  objetivosContainer: { margin: wp('1%'), marginTop: hp('2%') },
+  objetivoItemContainer: {
+    margin: wp('3%'),
+    backgroundColor: '#e3e3e3',
+    padding: wp('1%'),
+    borderRadius: 2,
+    // minWidth: wp('50%'),
+  },
+  objetivoImage: {
+    minHeight: hp('25%'),
+    minWidth: hp('25%'),
+  },
   // row: {
   //   marginTop: 20,
   //   flexDirection: 'row',
